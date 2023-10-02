@@ -1,4 +1,3 @@
-// App.js
 import React, { useState } from 'react';
 import './App.css';
 import Header from './Header'; // Keep the header
@@ -12,7 +11,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      {!userRole && <Header />} {/* Render Header only if there is no userRole */}
       <Container fluid>
         {!userRole ? (
           <AuthenticationComponent onLogin={setUserRole} />
