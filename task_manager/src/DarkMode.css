@@ -1,0 +1,27 @@
+/* DarkMode.css */
+body {
+    background-color: #121212;
+    color: #ffffff;
+  }
+  
+  button {
+    background-color: #424242;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  button:hover {
+    background-color: #616161;
+  }
+  
+  .container {
+    margin: 20px;
+  }
+  
+  .navbar {
+    background-color: #333333;
+  }
+  
