@@ -1,26 +1,35 @@
 import React, { useState } from 'react';
 import './App.css';
-import Header from './Header'; // Keep the header
 import AuthenticationComponent from './AuthenticationComponent';
 import AdminDashboard from './AdminDashboard';
 import UserDashboard from './UserDashboard';
-import Container from 'react-bootstrap/Container';
+import HomePage from './HomePage';
+import SignUp from './SignUp';  // Imported SignUp component
+import ProjectsPage from './ProjectsPage';  // Imported ProjectsPage component
 
 function App() {
-  const [userRole, setUserRole] = useState(null); // 'admin' or 'user'
+  const [currentPage, setCurrentPage] = useState('home'); // 'home', 'authentication', 'adminDashboard', 'userDashboard', 'signup', 'projects'
+
+  const handleNavigation = (selectedPage) => {
+    setCurrentPage(selectedPage);
+  };
+
+  const handleLogin = (role) => {
+    if (role === 'admin') {
+      setCurrentPage('adminDashboard');
+    } else if (role === 'user') {
+      setCurrentPage('userDashboard');
+    }
+  };
 
   return (
     <div className="App">
-      {!userRole && <Header />} {/* Render Header only if there is no userRole */}
-      <Container fluid>
-        {!userRole ? (
-          <AuthenticationComponent onLogin={setUserRole} />
-        ) : userRole === 'admin' ? (
-          <AdminDashboard />
-        ) : (
-          <UserDashboard />
-        )}
-      </Container>
+      {currentPage === 'home' && <HomePage onNavigate={handleNavigation} />}
+      {currentPage === 'authentication' && <AuthenticationComponent onLogin={handleLogin} />}
+      {currentPage === 'adminDashboard' && <AdminDashboard />}
+      {currentPage === 'userDashboard' && <UserDashboard />}
+      {currentPage === 'signup' && <SignUp onNavigate={handleNavigation} />}
+      {currentPage === 'projects' && <ProjectsPage onNavigate={handleNavigation} />}  {/* Added ProjectsPage rendering */}
     </div>
   );
 }
